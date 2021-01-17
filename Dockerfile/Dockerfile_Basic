@@ -1,0 +1,12 @@
+# 기본적인 뼈대 Dockerfile
+
+# from 을 사용하여 baseImage 명시 ex) ubuntu:14.04
+FROM alpine
+
+# 추가적으로 필요한 파일들을 다운로드 받는다.
+RUN command
+
+# 컨테이너 시작 시 실행 될 명령어를 명시한다.
+
+CMD ["echo", "hello"]
+
