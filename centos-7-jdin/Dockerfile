@@ -1,6 +1,7 @@
 FROM centos:7
 
 # parameter
+ARG userid=ysh8361
 ARG uid=1000
 ARG gid=50
 
@@ -16,20 +17,18 @@ RUN yum -y install net-tools
 RUN yum -y install unixODBC-devel
 
 # group and user
-# RUN addgroup --gid $gid mygroup
-# RUN adduser --uid $uid --gid $gid ysh8361
 
 RUN groupadd mygroup
-RUN adduser -G mygroup ysh8361
+RUN adduser -G mygroup ${userid}
 
 # mv to home
-WORKDIR /home/ysh8361
+WORKDIR /home/${userid}
 
-COPY ./pkg /home/ysh8361
-RUN chown ysh8361:mygroup /home/ysh8361 -R
+COPY ./pkg /home/${userid}
+RUN chown ${userid}:mygroup /home/${userid} -R
 
 # login
-USER ysh8361
+USER ${userid}
 
 # environment
 RUN echo 'export PKG_ROOT=${HOME}' >> ~/.bashrc
@@ -37,4 +36,4 @@ RUN source ~/.bashrc
 
 
 
-CMD ["echo", "hello ysh8361"]
+CMD ["echo", "hello", ${userid}]
