@@ -3,9 +3,10 @@
 ### 생성과 실행
 ```
 $ docker run alpine   
-$ docker run ${image} ${command} # command 는 없어도 됨
+$ docker run ${image} ${command} # command 는 없어도 
 $ docker run -p 5000:8080 ${image} ${command} ## 포트매핑 
 $ docker run -v /usr/src/app/node_modules -v $(pwd):/usr/src/app ${image} # -v 1  node_modules은 매핑하지 않음.  
+$ docker run -d --name testname user/name:dev
 2. pwd를 /usr/src/app 으로 참조
 ```
 
