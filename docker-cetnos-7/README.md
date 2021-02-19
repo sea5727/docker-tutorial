@@ -21,3 +21,28 @@ $ sudo docker exec -i -t centos /bin/bash
 $ systemctl start crond
 $ systemctl status crond
 ```
+
+### Systemd integration
+
+Systemd는 기본적으로 centos:7과 centos:latest에 포함되어 있지만 기본적으로 활성화되어있지 않다. 실행시키기 위해서 아래 텍스트를 포함시켜야 한다.
+
+```Dockerfile
+Dockerfile for systemd base image
+FROM centos:7
+ENV container docker
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+VOLUME [ "/sys/fs/cgroup" ]
+CMD ["/usr/sbin/init"]
+```
+This Dockerfile deletes a number of unit files which might cause issues. From here, you are ready to build your base image.
+```
+$ docker build --rm -t local/c7-systemd .
+```
