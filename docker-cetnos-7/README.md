@@ -25,6 +25,7 @@ $ systemctl status crond
 ### Systemd integration
 
 [참고](https://daftdevil.tistory.com/17)
+[참고](https://developers.redhat.com/blog/2014/05/05/running-systemd-within-docker-container/)
 
 Systemd는 기본적으로 centos:7과 centos:latest에 포함되어 있지만 기본적으로 활성화되어있지 않다. 실행시키기 위해서 아래 텍스트를 포함시켜야 한다.
 
