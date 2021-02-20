@@ -28,3 +28,4 @@ create database "tibero"
 			autoextend on next 100M
 			maxsize unlimited
 			extent management local autoallocate;
+exit;
