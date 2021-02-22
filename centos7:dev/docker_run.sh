@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker run -d \
+docker run -d --privileged \
 --name centos7 \
 --cap-add=SYS_ADMIN --security-opt=seccomp:unconfined \
 -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
